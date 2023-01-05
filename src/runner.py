@@ -3,7 +3,7 @@ import sys
 import types
 from inspect import getmembers, isfunction
 import os
-
+import colors
 
 class Runner:
     def __init__(self, path):
@@ -36,18 +36,18 @@ class Runner:
             (test_name, test_function) = test
             try:
                 test_function()
-                print(f'running test {test_name} - success')
+                print(f'running test {test_name} - {colors.GREEN}success{colors.RESET}')
             except AssertionError:
-                print(f'running test {test_name} - failure')
+                print(f'running test {test_name} - {colors.RED}failure{colors.RESET}')
                 self.success = False
 
     def run(self):
         for test_file in self.test_files:
             self.run_single_file(test_file)
         if self.success:
-            print(f'test succeeded')
+            print(f'{colors.GREEN}test succeeded{colors.RESET}')
         else:
-            print(f'test failed')
+            print(f'{colors.RED}test failed{colors.RESET}')
 
 
 if __name__ == '__main__':
