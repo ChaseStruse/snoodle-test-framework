@@ -5,6 +5,7 @@ from inspect import getmembers, isfunction
 import os
 import colors
 
+
 class Runner:
     def __init__(self, path):
         self.test_files = []
@@ -20,17 +21,19 @@ class Runner:
             for nested_path in os.listdir(path):
                 self.load_test_files(path + '/' + nested_path)
 
-    def load_tests(self, mod):
+    @staticmethod
+    def load_tests(mod):
         return [m for m in getmembers(mod) if isfunction(m[1]) and m[0].startswith('test_')]
 
-    def load_module(self, file):
+    @staticmethod
+    def load_module(file):
         loader = importlib.machinery.SourceFileLoader('testmod', file)
         mod = types.ModuleType('testmod')
         loader.exec_module(mod)
         return mod
 
     def run_single_file(self, file):
-        mod = self.load_module(self.test_files[0])
+        mod = self.load_module(file)
         tests = self.load_tests(mod)
         for test in tests:
             (test_name, test_function) = test
@@ -50,6 +53,5 @@ class Runner:
             print(f'{colors.RED}test failed{colors.RESET}')
 
 
-if __name__ == '__main__':
+def main():
     Runner(sys.argv[1]).run()
-
