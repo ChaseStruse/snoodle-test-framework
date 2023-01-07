@@ -6,4 +6,4 @@ def test_num_success():
 
 
 def test_num_failure():
-    expect(1 + 1).toEqual(5)
+    expect(1 + 1).toEqual(2)

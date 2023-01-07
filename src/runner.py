@@ -4,6 +4,7 @@ import types
 from inspect import getmembers, isfunction
 import os
 import colors
+import expectations
 
 
 class Runner:
@@ -40,7 +41,7 @@ class Runner:
             try:
                 test_function()
                 print(f'running test {test_name} - {colors.GREEN}success{colors.RESET}')
-            except AssertionError:
+            except expectations.FailedExpectation as e:
                 print(f'running test {test_name} - {colors.RED}failure{colors.RESET}')
                 self.success = False
 

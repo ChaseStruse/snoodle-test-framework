@@ -6,4 +6,4 @@ def test_success():
 
 
 def test_failure():
-    expect(False).toEqual(False)
+    expect(False).toEqual(True)
