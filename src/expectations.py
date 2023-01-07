@@ -3,31 +3,28 @@ import operator
 def expect(value):
     return Expectation(value)
 
-
 class FailedExpectation(RuntimeError):
     def __init__(self, message):
         self.message = message
 
-
-class Expectation:
+class Expectation():
     def __init__(self, value):
         self.value = value
 
-    def toEqual(self, comparison):
-        self._assert(comparison, operator.eq, "to equal")
+    def toEqual(self, comp):
+        return self._assert(comp, operator.eq)
 
-    def notToEqual(self, comparison):
-        self._assert(comparison, operator.is_not, "not to equal")
+    def notToEqual(self, comp):
+        return self._assert(comp, operator.is_not)
 
-    def toInclude(self, element):
-        self._assert(element, operator.contains, "to include")
+    def _assert(self, comp, op):
+        if not op(self.value, comp):
+            raise FailedExpectation(
+                f"expected {self.value} {self._operator_word(op)} {comp}")
+        return True
 
-    def notToInclude(self, element):
-        def not_include(ls, el):
-            return el not in ls
-
-        self._assert(element, not_include, "not to include")
-
-    def _assert(self, comparison, op, message):
-        if not op(self.value, comparison):
-            FailedExpectation(f"expected {self.value} {message} {comparison}")
+    def _operator_word(self, op):
+        if op == operator.eq:
+            return "to equal"
+        if op == operator.is_not:
+            return "not to equal"

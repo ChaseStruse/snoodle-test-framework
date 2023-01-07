@@ -1,9 +1,9 @@
 from src.expectations import expect
 
+class TestBooleans:
+    def test_success(self):
+        expect(True).toEqual(True)
 
-def test_success():
-    expect(True).toEqual(True)
 
-
-def test_failure():
-    expect(False).toEqual(True)
+    def test_failure(self):
+        expect(False).toEqual(True)
