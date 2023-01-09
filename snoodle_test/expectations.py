@@ -1,11 +1,14 @@
 import operator
 
+
 def expect(value):
     return Expectation(value)
+
 
 class FailedExpectation(RuntimeError):
     def __init__(self, message):
         self.message = message
+
 
 class Expectation():
     def __init__(self, value):
