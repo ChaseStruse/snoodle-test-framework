@@ -3,8 +3,8 @@ import sys
 import types
 from inspect import getmembers, isclass
 import os
-from src.colors import RED, GREEN, RESET
-from src.expectations import FailedExpectation
+from snoodle_test.colors import RED, GREEN, RESET
+from snoodle_test.expectations import FailedExpectation
 
 
 class Runner:
@@ -82,3 +82,6 @@ class Runner:
 
 def main():
     Runner(sys.argv[1]).run()
+
+if __name__ == '__main__':
+    main()

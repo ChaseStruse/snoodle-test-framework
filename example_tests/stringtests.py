@@ -1,4 +1,4 @@
-from src.expectations import expect
+from snoodle_test.expectations import expect
 
 class TestStrings:
 
