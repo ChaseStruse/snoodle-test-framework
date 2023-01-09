@@ -5,10 +5,10 @@ Test framework created using Python. This is just a fun project that I wanted to
 ## Running
 
 - Pull the latest code from master 
-- Navigate to the src directory
+- Navigate to the snoodle-test-framework directory
 - Run the following command
-    - python __main__.py ../example-tests
-- This should then run the tests 2 should succeed and 2 should fail
+    - python -m snoodle_test.runner example_tests
+- This should then run the tests 3 should succeed and 3 should fail
 
 ### Setting up test files
 
