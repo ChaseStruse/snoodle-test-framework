@@ -1,4 +1,9 @@
-import runner
+from snoodle_test import cli, __app_name__
 
-if __name__ == '__main__':
-    raise SystemExit(runner.main())
+
+def main():
+    cli.app(prog_name=__app_name__)
+
+
+if __name__ == "__main__":
+    main()

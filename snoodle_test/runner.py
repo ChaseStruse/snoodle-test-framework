@@ -94,11 +94,3 @@ class Runner:
         print("Files with Failing Tests: ")
         for failure in self.failingFiles:
             print(f"{RED}{failure}{RESET}")
-
-
-def main():
-    Runner(sys.argv[1]).run()
-
-
-if __name__ == '__main__':
-    main()
