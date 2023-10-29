@@ -15,6 +15,10 @@ def get_operator_string_value(op):
         return "to equal"
     if op == operator.is_not:
         return "not to equal"
+    if op == operator.lt:
+        return "to be less than"
+    if op == operator.gt:
+        return "to be greater than"
 
 
 class FailedExpectation(RuntimeError):
@@ -50,6 +54,24 @@ class Expectation:
                  the runner.py
         """
         return self._assert(comparison, operator.is_not)
+
+    def is_less_than(self, comparison: str) -> bool:
+        """
+        Checks if the value is less than by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.lt)
+
+    def is_greater_than(self, comparison: str) -> bool:
+        """
+        Checks if the value is greater than by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.gt)
 
     def _assert(self, comparison: str, oper: operator) -> bool:
         """
