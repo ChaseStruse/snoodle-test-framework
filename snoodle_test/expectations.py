@@ -19,6 +19,8 @@ def get_operator_string_value(op):
         return "to be less than"
     if op == operator.gt:
         return "to be greater than"
+    if op == operator.is_:
+        return "to be the same as"
 
 
 class FailedExpectation(RuntimeError):
@@ -73,7 +75,10 @@ class Expectation:
         """
         return self._assert(comparison, operator.gt)
 
-    def _assert(self, comparison: str, oper: operator) -> bool:
+    def is_the_same(self, comparison) -> bool:
+        return self._assert(comparison, operator.is_)
+
+    def _assert(self, comparison, oper: operator) -> bool:
         """
         Checks if the given test is failing\n
         :param comparison: The value that is to be evaluated

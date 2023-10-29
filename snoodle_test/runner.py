@@ -73,4 +73,5 @@ class Runner:
         print_intro()
         for (i, file) in enumerate(self.files):
             self.run_file(file, i)
-        print_summary(failing=self.failing_methods, passing=self.successful_methods)
+        print_summary(failing=self.failing_methods, passing=self.successful_methods, total_failing=self.failures,
+                      total_passing=self.successes)
