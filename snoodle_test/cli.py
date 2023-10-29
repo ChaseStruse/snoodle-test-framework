@@ -18,7 +18,7 @@ def test(path=typer.Argument()):
     Will run the test runner for the passed in directory path.
     :parameter path Directory path for your test files
     """
-    runner.Runner(path).run()
+    runner.Runner(path)
 
 
 @app.callback()

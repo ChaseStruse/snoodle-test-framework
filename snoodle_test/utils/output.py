@@ -1,4 +1,4 @@
-from snoodle_test.colors import GREEN, RED, RESET
+from snoodle_test.utils.colors import GREEN, RED, RESET
 
 
 def print_intro():
