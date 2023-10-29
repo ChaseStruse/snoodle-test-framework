@@ -13,6 +13,7 @@ class Runner:
         self.find_test_files(path)
         self.failing_methods = defaultdict(dict)
         self.successful_methods = defaultdict(dict)
+        self.run()
 
     def find_test_files(self, path):
         if path == "__pycache__":
