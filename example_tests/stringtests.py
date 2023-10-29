@@ -4,7 +4,7 @@ from snoodle_test.expectations import expect
 class TestStrings:
 
     def test_string_success(self):
-        expect('Hello').toEqual('Hello')
+        expect('Hello').is_not_equal('Hello')
 
     def test_string_failure(self):
-        expect('hello').toEqual('hi')
+        expect('hello').is_equal('hi')

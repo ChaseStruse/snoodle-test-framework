@@ -10,14 +10,14 @@ class FailedExpectation(RuntimeError):
         self.message = message
 
 
-class Expectation():
+class Expectation:
     def __init__(self, value):
         self.value = value
 
-    def toEqual(self, comp):
+    def is_equal(self, comp):
         return self._assert(comp, operator.eq)
 
-    def notToEqual(self, comp):
+    def is_not_equal(self, comp):
         return self._assert(comp, operator.is_not)
 
     def _assert(self, comp, op):
