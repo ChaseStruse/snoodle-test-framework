@@ -1,4 +1,5 @@
 import operator
+from enum import Enum
 
 
 def expect(value):
@@ -11,24 +12,22 @@ def get_operator_string_value(op):
     :param op:
     :return:
     """
-    if op == operator.eq:
-        return "to equal"
-    if op == operator.is_not:
-        return "not to equal"
-    if op == operator.lt:
-        return "to be less than"
-    if op == operator.gt:
-        return "to be greater than"
-    if op == operator.is_:
-        return "to be the same as"
-    if op == operator.is_not:
-        return "to not be the same as"
+    operator_str_values = {
+        operator.eq: "equal to",
+        operator.ne: "not to equal",
+        operator.lt: "to be less than",
+        operator.gt: "to be greater than",
+        operator.is_: "to be the same as",
+        operator.is_not: "to not be the same as"
+    }
+    return operator_str_values[op]
 
 
 class FailedExpectation(RuntimeError):
     """
     Custom exception that will return a custom error message.
     """
+
     def __init__(self, message):
         self.message = message
 
@@ -38,8 +37,12 @@ class Expectation:
     This class is to be used within the test files to evaluate assertions.
     :param value: value that you would like to compare
     """
+
     def __init__(self, value):
         self.value = value
+        self.operator_str_values = {
+            operator.eq: "equal to"
+        }
 
     def is_equal(self, comparison: str) -> bool:
         """
@@ -57,7 +60,7 @@ class Expectation:
         :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
                  the runner.py
         """
-        return self._assert(comparison, operator.is_not)
+        return self._assert(comparison, operator.ne)
 
     def is_less_than(self, comparison: str) -> bool:
         """
@@ -94,6 +97,3 @@ class Expectation:
             raise FailedExpectation(f"Expected {self.value} {get_operator_string_value(oper)} {comparison}")
 
         return True
-
-
-

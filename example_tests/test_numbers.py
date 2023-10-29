@@ -10,6 +10,12 @@ class TestNumbers:
     def test_num_failure(self):
         expect(1 + 1).is_equal(22)
 
+    def test_num_is_not_equal_success(self):
+        expect(1 + 2).is_not_equal(2)
+
+    def test_num_is_not_equal_failure(self):
+        expect(1 + 1).is_not_equal(2)
+
     def test_num_less_than(self):
         expect(25).is_less_than(28)
 
