@@ -12,5 +12,5 @@ Test framework created using Python. This is just a fun project that I wanted to
 ### Setting up test files
 
 - Test class must begin with Test, for example TestString, TestBoolean, etc
-- Currently you can use is_equal and is_not_equal
+- Currently you can use IsEqual, IsNotEqual, IsLessThan, IsGreaterThan, ObjectsAreTheSame, and ObjectsAreNotTheSame
 - For some example tests checkout the example-tests folder
