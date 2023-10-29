@@ -1,12 +1,9 @@
-import importlib.machinery
-import types
-from inspect import getmembers, isclass
 import os
 from collections import defaultdict
 from snoodle_test.colors import RED, GREEN, RESET
 from snoodle_test.expectations import FailedExpectation
 from snoodle_test.output import print_intro, print_summary
-
+from snoodle_test.utils.runner_utils import load_module, find_test_classes
 
 class Runner:
     def __init__(self, path):
@@ -25,21 +22,10 @@ class Runner:
         elif path.endswith(".py"):
             self.files.append(path)
 
-    @staticmethod
-    def find_test_classes(mod):
-        return [c[1] for c in getmembers(mod) if isclass(c[1]) and c[0].startswith("Test")]
-
-    @staticmethod
-    def load_module(file, modnr):
-        loader = importlib.machinery.SourceFileLoader(f"mod{modnr}", file)
-        mod = types.ModuleType(loader.name)
-        loader.exec_module(mod)
-        return mod
-
     def run_file(self, file, modnr):
         print(f"Running file {file}")
-        mod = self.load_module(file, modnr)
-        classes = self.find_test_classes(mod)
+        mod = load_module(file, modnr)
+        classes = find_test_classes(mod)
 
         for test_class in classes:
             self.run_class_tests(test_class, file)
@@ -68,7 +54,7 @@ class Runner:
 
     def add_failing_message_to_dict(self, test_name: str, file_name: str, error_message: str) -> None:
         self.failures += 1
-        failing_message = f"{RED}Failing Method: {test_name} Reason for failure: {error_message}{RESET}"
+        failing_message = f"{RED}Failing Method: {test_name} {RESET}|{RED} Reason: {error_message}{RESET}"
         if self.failing_methods[file_name]:
             self.failing_methods[file_name][self.failures] = failing_message
         else:
