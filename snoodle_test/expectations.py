@@ -2,10 +2,6 @@ import operator
 from enum import Enum
 
 
-def expect(value):
-    return Expectation(value)
-
-
 def get_operator_string_value(op):
     """
     Gets the string value of a standard operator and converts it to a printable value.
@@ -23,11 +19,15 @@ def get_operator_string_value(op):
     return operator_str_values[op]
 
 
+def expect(value):
+    """Creates an expectation obj that will then be used to create comparisons"""
+    return Expectation(value)
+
+
 class FailedExpectation(RuntimeError):
     """
     Custom exception that will return a custom error message.
     """
-
     def __init__(self, message):
         self.message = message
 
@@ -37,12 +37,8 @@ class Expectation:
     This class is to be used within the test files to evaluate assertions.
     :param value: value that you would like to compare
     """
-
     def __init__(self, value):
         self.value = value
-        self.operator_str_values = {
-            operator.eq: "equal to"
-        }
 
     def is_equal(self, comparison: str) -> bool:
         """
@@ -81,9 +77,21 @@ class Expectation:
         return self._assert(comparison, operator.gt)
 
     def is_the_same(self, comparison) -> bool:
+        """
+        Checks if the object is the same by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
         return self._assert(comparison, operator.is_)
 
     def is_not_the_same(self, comparison) -> bool:
+        """
+        Checks if the object is not the same by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
         return self._assert(comparison, operator.is_not)
 
     def _assert(self, comparison, oper: operator) -> bool:
