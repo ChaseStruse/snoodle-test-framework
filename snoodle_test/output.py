@@ -26,4 +26,4 @@ def print_summary(failing, passing, total_failing, total_passing):
     print("-------------------------------------------")
     print_results(methods_list=failing)
     print("-------------------------------------------")
-    print(f"Results: {GREEN}{total_failing} passed{RESET} | {RED}{total_failing} failed{RESET}")
+    print(f"Results: {GREEN}{total_passing} passed{RESET} | {RED}{total_failing} failed{RESET}")

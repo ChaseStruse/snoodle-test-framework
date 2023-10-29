@@ -5,6 +5,7 @@ from snoodle_test.expectations import FailedExpectation
 from snoodle_test.output import print_intro, print_summary
 from snoodle_test.utils.runner_utils import load_module, find_test_classes
 
+
 class Runner:
     def __init__(self, path):
         self.files = []
@@ -64,7 +65,6 @@ class Runner:
         try:
             test_function()
             self.add_success_message_to_dict(test_name, file_name=file_name)
-            self.successes += 1
 
         except FailedExpectation as e:
             self.add_failing_message_to_dict(test_name=test_name, file_name=file_name, error_message=e.message)

@@ -21,6 +21,8 @@ def get_operator_string_value(op):
         return "to be greater than"
     if op == operator.is_:
         return "to be the same as"
+    if op == operator.is_not:
+        return "to not be the same as"
 
 
 class FailedExpectation(RuntimeError):
@@ -77,6 +79,9 @@ class Expectation:
 
     def is_the_same(self, comparison) -> bool:
         return self._assert(comparison, operator.is_)
+
+    def is_not_the_same(self, comparison) -> bool:
+        return self._assert(comparison, operator.is_not)
 
     def _assert(self, comparison, oper: operator) -> bool:
         """
