@@ -1,4 +1,4 @@
-from snoodle_test.expectations import expect
+from snoodle_test.expectations import *
 
 
 class TClass:
@@ -9,18 +9,18 @@ class TClass:
 class TestObjects:
     def test_is_the_same_success(self):
         test = TClass(attr="test")
-        expect(test).is_the_same(test)
+        ObjectsAreTheSame(actual=test, expected=test)
 
     def test_is_the_same_fails(self):
         test = TClass(attr="test")
         other_test = TClass(attr="other test")
-        expect(test).is_the_same(other_test)
+        ObjectsAreTheSame(actual=test, expected=other_test)
 
     def test_is_not_the_same_success(self):
         test = TClass(attr="test")
         other_test = TClass(attr="other test")
-        expect(test).is_not_the_same(other_test)
+        ObjectsAreNotTheSame(actual=test, expected=other_test)
 
     def test_is_not_the_same_fails(self):
         test = TClass(attr="test")
-        expect(test).is_not_the_same(test)
+        ObjectsAreNotTheSame(actual=test, expected=test)

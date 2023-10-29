@@ -1,29 +1,29 @@
 import dataclasses
-from snoodle_test.expectations import expect
+from snoodle_test.expectations import *
 
 
 class TestNumbers:
 
-    def test_num_success(self):
-        expect(1 + 1).is_equal(2)
+    def test_is_equal_success(self):
+        IsEqual(actual=10, expected=10)
 
-    def test_num_failure(self):
-        expect(1 + 1).is_equal(22)
+    def test_is_equal_fails(self):
+        IsEqual(actual=10, expected=5)
 
-    def test_num_is_not_equal_success(self):
-        expect(1 + 2).is_not_equal(2)
+    def test_is_not_equal_success(self):
+        IsNotEqual(actual=10, expected=5)
 
-    def test_num_is_not_equal_failure(self):
-        expect(1 + 1).is_not_equal(2)
+    def test_is_not_equal_fails(self):
+        IsNotEqual(actual=10, expected=10)
 
-    def test_num_less_than(self):
-        expect(25).is_less_than(28)
+    def test_is_less_than_success(self):
+        IsLessThan(actual=5, expected=10)
 
-    def test_num_greater_than(self):
-        expect(25).is_greater_than(10)
+    def test_is_less_than_fails(self):
+        IsLessThan(actual=10, expected=5)
 
-    def test_num_less_than_fails(self):
-        expect(25).is_less_than(1)
+    def test_is_greater_than_success(self):
+        IsGreaterThan(actual=10, expected=5)
 
     def test_num_greater_than_fails(self):
-        expect(25).is_greater_than(100)
+        IsGreaterThan(actual=5, expected=10)

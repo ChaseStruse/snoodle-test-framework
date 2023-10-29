@@ -40,60 +40,6 @@ class Expectation:
     def __init__(self, value):
         self.value = value
 
-    def is_equal(self, comparison: str) -> bool:
-        """
-        Checks if the values are equal by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.eq)
-
-    def is_not_equal(self, comparison: str) -> bool:
-        """
-        Checks if the values are not equal by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.ne)
-
-    def is_less_than(self, comparison: str) -> bool:
-        """
-        Checks if the value is less than by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.lt)
-
-    def is_greater_than(self, comparison: str) -> bool:
-        """
-        Checks if the value is greater than by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.gt)
-
-    def is_the_same(self, comparison) -> bool:
-        """
-        Checks if the object is the same by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.is_)
-
-    def is_not_the_same(self, comparison) -> bool:
-        """
-        Checks if the object is not the same by invoking the _assert method\n
-        :param comparison: The value that is to be evaluated
-        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
-                 the runner.py
-        """
-        return self._assert(comparison, operator.is_not)
-
     def _assert(self, comparison, oper: operator) -> bool:
         """
         Checks if the given test is failing\n
@@ -105,3 +51,99 @@ class Expectation:
             raise FailedExpectation(f"Expected {self.value} {get_operator_string_value(oper)} {comparison}")
 
         return True
+
+
+class IsEqual(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_equal(expected)
+
+    def is_equal(self, comparison: str) -> bool:
+        """
+        Checks if the values are equal by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.eq)
+
+
+class IsNotEqual(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_not_equal(expected)
+
+    def is_not_equal(self, comparison: str) -> bool:
+        """
+        Checks if the values are not equal by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.ne)
+
+
+class IsLessThan(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_less_than(expected)
+
+    def is_less_than(self, comparison: str) -> bool:
+        """
+        Checks if the value is less than by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.lt)
+
+
+class IsGreaterThan(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_greater_than(expected)
+
+    def is_greater_than(self, comparison: str) -> bool:
+        """
+        Checks if the value is greater than by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.gt)
+
+
+class ObjectsAreTheSame(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_the_same(expected)
+
+    def is_the_same(self, comparison) -> bool:
+        """
+        Checks if the object is the same by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.is_)
+
+
+class ObjectsAreNotTheSame(Expectation):
+    def __init__(self, actual, expected):
+        super().__init__(actual)
+        self.expected = expected
+        self.is_not_the_same(expected)
+
+    def is_not_the_same(self, comparison) -> bool:
+        """
+        Checks if the object is not the same by invoking the _assert method\n
+        :param comparison: The value that is to be evaluated
+        :return: True, unless it is failing then it will raise an error and not return. These errors are handled within
+                 the runner.py
+        """
+        return self._assert(comparison, operator.is_not)
