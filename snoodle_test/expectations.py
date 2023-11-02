@@ -1,27 +1,4 @@
 import operator
-from enum import Enum
-
-
-def get_operator_string_value(op):
-    """
-    Gets the string value of a standard operator and converts it to a printable value.
-    :param op:
-    :return:
-    """
-    operator_str_values = {
-        operator.eq: "equal to",
-        operator.ne: "not to equal",
-        operator.lt: "to be less than",
-        operator.gt: "to be greater than",
-        operator.is_: "to be the same as",
-        operator.is_not: "to not be the same as"
-    }
-    return operator_str_values[op]
-
-
-def expect(value):
-    """Creates an expectation obj that will then be used to create comparisons"""
-    return Expectation(value)
 
 
 class FailedExpectation(RuntimeError):
@@ -147,3 +124,25 @@ class ObjectsAreNotTheSame(Expectation):
                  the runner.py
         """
         return self._assert(comparison, operator.is_not)
+
+
+def get_operator_string_value(op: operator) -> str:
+    """
+    Gets the string value of a standard operator and converts it to a printable value.
+    :param op: operator that is being used, for example operator.eq
+    :return: str value that equates to the operator
+    """
+    operator_str_values = {
+        operator.eq: "equal to",
+        operator.ne: "not to equal",
+        operator.lt: "to be less than",
+        operator.gt: "to be greater than",
+        operator.is_: "to be the same as",
+        operator.is_not: "to not be the same as"
+    }
+    return operator_str_values[op]
+
+
+def expect(value) -> Expectation:
+    """Creates an expectation obj that will then be used to create comparisons"""
+    return Expectation(value)

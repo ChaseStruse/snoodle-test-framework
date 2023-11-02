@@ -2,7 +2,7 @@ import os
 from collections import defaultdict
 from snoodle_test.utils.colors import RED, GREEN, RESET
 from snoodle_test.expectations import FailedExpectation
-from snoodle_test.utils.output import print_intro, print_summary
+from snoodle_test.utils.console_output_utils import print_intro, print_summary
 from snoodle_test.utils.runner_utils import load_module, find_test_classes
 
 
